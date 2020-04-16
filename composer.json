@@ -1,11 +1,10 @@
 {
   "name": "hasnath/queryable",
-  "description": "Laravel Queryable Trait",
+  "description": "Laravel Queryable",
   "license": "MIT",
   "keywords": [
     "laravel",
-    "queryable",
-    "trait"
+    "queryable"
   ],
   "authors": [
     {
