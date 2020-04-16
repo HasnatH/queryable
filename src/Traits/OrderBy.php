@@ -4,7 +4,42 @@ namespace HasnatH\Queryable\Traits;
 
 trait OrderBy
 {
-    protected $orderByFields;
+    public function orderBy($query, $orderByFields)
+    {
+        if ( ! $orderByFields || ! count($orderByFields)) {
+            return $query;
+        }
+
+        foreach ($this->getOrderBy() as $orderBy) {
+            $query->orderBy($orderBy['field'], $orderBy['order']);
+        }
+
+        return $query;
+    }
+
+    public function getOrderBy($orderByFields)
+    {
+        $orderBy = [];
+
+        if ( ! $orderByFields || ! count($orderByFields)) {
+            return $orderBy;
+        }
+
+        $fields = $this->getOrderable();
+
+        foreach ($orderByFields as $orderByField) {
+            $orderByField = explode(config('queryable.orderBy.separator'), $orderByField);
+
+            if (in_array($orderByField[0], $fields)) {
+                $orderBy[] = [
+                    'field' => $orderByField[0],
+                    'order' => count($orderByField) == 2 ? $orderByField[1] : 'ASC'
+                ];
+            }
+        }
+
+        return $orderBy;
+    }
 
     public function getOrderable()
     {
@@ -13,42 +48,5 @@ trait OrderBy
         return property_exists($model, 'orderable')
             ? $model::$orderable
             : $this->getFields();
-    }
-
-    public function getOrderBy($orderByFields)
-    {
-        $this->orderByFields = [];
-
-        if ( ! $orderByFields) {
-            return $this;
-        }
-
-        $fields = $this->getOrderable();
-
-        foreach ($orderByFields as $orderBy) {
-            $orderBy = explode(config('queryable.orderBy.separator'), $orderBy);
-
-            if (in_array($orderBy[0], $fields)) {
-                $this->orderByFields[] = [
-                    'field' => $orderBy[0],
-                    'order' => count($orderBy) == 2 ? $orderBy[1] : 'ASC'
-                ];
-            }
-        }
-
-        return $this;
-    }
-
-    public function applyOrderBy($query)
-    {
-        if ( ! count($this->orderByFields)) {
-            return $query;
-        }
-
-        foreach ($this->orderByFields as $orderBy) {
-            $query->orderBy($orderBy['field'], $orderBy['order']);
-        }
-
-        return $query;
     }
 }

@@ -1,16 +1,18 @@
 <?php
 
-namespace HasnatH\Queryable\Traits;
+namespace HasnatH\Queryable;
 
+use HasnatH\Queryable\Traits\Filter;
+use HasnatH\Queryable\Traits\OrderBy;
 use Illuminate\Support\Facades\Schema;
 
-trait Queryable
+class Queryable
 {
     use Filter, OrderBy;
 
     protected $model;
 
-    public function setModel($model)
+    public function __construct($model)
     {
         $this->model = $model;
     }
