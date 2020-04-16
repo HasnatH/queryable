@@ -10,7 +10,7 @@ trait OrderBy
             return $query;
         }
 
-        foreach ($this->getOrderBy() as $orderBy) {
+        foreach ($this->getOrderBy($orderByFields) as $orderBy) {
             $query->orderBy($orderBy['field'], $orderBy['order']);
         }
 
