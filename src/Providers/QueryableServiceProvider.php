@@ -1,5 +1,7 @@
 <?php
 
+namespace HasnatH\Queryable\Providers;
+
 use Illuminate\Support\ServiceProvider;
 
 class QueryableServiceProvider extends ServiceProvider
