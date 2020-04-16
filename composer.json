@@ -1,5 +1,5 @@
 {
-  "name": "hasnathoque/queryable",
+  "name": "hasnath/queryable",
   "description": "Laravel Queryable Trait",
   "license": "MIT",
   "keywords": [
@@ -25,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "HasnatHoque\\Queryable\\": "src/"
+      "HasnatH\\Queryable\\": "src/"
     }
   },
   "config": {

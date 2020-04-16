@@ -1,6 +1,6 @@
 <?php
 
-namespace HasnatHoque\Queryable\Traits;
+namespace HasnatH\Queryable\Traits;
 
 trait Filter
 {
