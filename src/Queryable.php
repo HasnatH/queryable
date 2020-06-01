@@ -22,9 +22,14 @@ class Queryable
         return $this->model;
     }
 
+    public function getTable()
+    {
+        return (new $this->model)->getTable();
+    }
+
     public function getFields()
     {
-        return Schema::getColumnListing((new $this->model)->getTable());
+        return Schema::getColumnListing($this->getTable());
     }
 
     public function getFillable($collection)

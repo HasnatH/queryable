@@ -11,7 +11,7 @@ trait Filter
         }
 
         foreach ($this->getFilters($filters) as $filter) {
-            $query->where($filter['field'], $filter['operator'], $filter['value']);
+            $query->{$filter['method']}($filter['field'], $filter['operator'], $filter['value']);
         }
 
         return $query;
@@ -34,7 +34,8 @@ trait Filter
                 $filters[] = [
                     'field'    => $filter[0],
                     'value'    => $filter[1],
-                    'operator' => count($filter) == 3 ? $filter[2] : '='
+                    'operator' => count($filter) > 2 ? $filter[2] : '=',
+                    'method'   => count($filter) > 3 ? $filter[3] : 'where'
                 ];
             }
         }

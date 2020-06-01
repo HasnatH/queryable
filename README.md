@@ -123,15 +123,15 @@ The `$filter` parameter is an array of your filters in the following format
 
 ```php
 [
-    "FIELD,VALUE,OPERATOR",
+    "FIELD,VALUE,OPERATOR,METHOD",
 ]
 ```
 
 The `FIELD` and `VALUE` fields are required for each filter. 
 
-The `OPERATOR` field is optional and will default to `=`
+The `OPERATOR` and `METHOD` fields are optional and will default to `=` and `where` respectively.
 
-The following `OPERATORS` can be used
+The following `OPERATOR` options can be used
 
 ```
 = 
@@ -145,6 +145,16 @@ LIKE
 NOT LIKE
 BETWEEN
 ILIKE
+```
+
+The following `METHOD` options can be used
+```
+where
+whereDate
+whereTime
+whereDay
+whereMonth
+whereYear
 ```
 
 You can apply as many filters as you would like.
@@ -198,6 +208,11 @@ public function index()
 To get the users that have the `first_name` `John` and `id` greater than `3`
 ```
 GET /users?filter[]=first_name,John&filter[]=id,3,>
+```
+
+To get the users that were created after `2020-01-01`
+```
+GET /users?filter[]=created_at,2020-01-01,>=,whereDate
 ```
 
 ### OrderBy 
